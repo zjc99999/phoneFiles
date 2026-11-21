@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Baseline manifest",
+  "description": "客户端内置签名规则快照清单。此文件列出 baseline 快照包含的规则及其元数据。",
+  "snapshotId": "baseline-2026-11-21",
+  "builtAt": "2026-11-21T11:45:00+08:00",
+  "schemaVersion": "1.0",
+  "coverage": {
+    "note": "冷启动目标：Top 30 机型/ROM 族 × 5 类；当前为起始种子，需由 spike 真机采样扩充。",
+    "targetDeviceFamilies": 30,
+    "targetCategories": ["camera_media", "screenshots", "downloads", "recordings", "unknown"],
+    "currentRules": 4
+  },
+  "rules": [
+    { "file": "android.generic.camera.mtp.yml", "sha256": "PLACEHOLDER", "status": "stable" },
+    { "file": "android.miui.camera.mtp.yml", "sha256": "PLACEHOLDER", "status": "stable" },
+    { "file": "android.generic.screenshots.mtp.yml", "sha256": "PLACEHOLDER", "status": "stable" },
+    { "file": "android.generic.downloads.mtp.yml", "sha256": "PLACEHOLDER", "status": "stable" }
+  ],
+  "signing": {
+    "note": "正式发布时对此 manifest 与每个规则文件计算 sha256 并用维护者私钥签名；当前为种子占位。",
+    "algorithm": "Ed25519",
+    "publicKey": "PLACEHOLDER"
+  },
+  "rollback": {
+    "note": "在线规则包异常时客户端回退到此 baseline；签名校验失败亦回退。",
+    "onSignatureFailure": "use_baseline"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phonefiles.dev/schema/rule.schema.json",
+  "title": "Rule",
+  "description": "由多条脱敏观测聚类派生的规则，带置信度、证据链、版本与灰度状态。不是人工维护的真相。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "priority", "match", "candidates", "confidence", "evidence", "version", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "规则 ID，如 android.miui.camera.mtp.v3。",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9_]+){2,}$"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "匹配优先级，数值越大越先匹配。",
+      "minimum": 0
+    },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["osFamily", "channel"],
+      "properties": {
+        "osFamily": { "type": "string", "enum": ["android"] },
+        "romFamily": {
+          "type": "array",
+          "description": "适用的 ROM 族；空数组表示通配。",
+          "items": { "type": "string" }
+        },
+        "sdkRange": { "type": "string", "description": "如 >=21, 28-33。" },
+        "channel": { "type": "string", "enum": ["mtp", "adb"] },
+        "appPackage": {
+          "type": ["string", "null"],
+          "description": "关联 App 包名；null 表示不关联具体 App。"
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "description": "候选节点列表。同条件多候选全部保留、按置信度排序展示，不强行覆盖。",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["nodePattern", "label", "risk"],
+        "properties": {
+          "nodePattern": { "type": "string", "description": "WPD 相对节点名，可含 * 通配段。" },
+          "label": { "type": "string", "description": "中文语义标签。" },
+          "risk": { "type": "string", "enum": ["read_only", "private", "unknown"] },
+          "defaultAction": { "type": "string", "enum": ["backup", "show_only", "ignore"], "default": "show_only" }
+        }
+      }
+    },
+    "detect": {
+      "type": "object",
+      "description": "现场指纹探测线索（辅助语义层）。",
+      "additionalProperties": false,
+      "properties": {
+        "byFingerprint": { "type": "string", "examples": ["ext:{jpg|png|mp4} ratio > 0.6"] }
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "description": "置信度：独立观测数 + 设备多样性 + 时间新鲜度的函数。",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "evidence": {
+      "type": "array",
+      "description": "支撑该规则的观测 ID 列表。",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^obs_" }
+    },
+    "verifiedAt": { "type": "string", "format": "date" },
+    "since": { "type": "string", "format": "date", "description": "规则生效日期。" },
+    "supersedes": {
+      "type": ["string", "null"],
+      "description": "被本规则取代的旧规则 ID。"
+    },
+    "version": { "type": "integer", "minimum": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["baseline", "stable", "canary", "pending_review"],
+      "description": "baseline=内置签名快照；stable=稳定通道；canary=灰度；pending_review=待复核。"
+    }
+  }
+}

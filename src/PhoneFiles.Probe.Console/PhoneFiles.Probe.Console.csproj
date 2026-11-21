@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PhoneFiles.Core/PhoneFiles.Core.csproj" />
+    <ProjectReference Include="../PhoneFiles.Transport.Mtp/PhoneFiles.Transport.Mtp.csproj" />
+  </ItemGroup>
+
+  <!-- Ship rule yml next to the exe so selftest/semantic work from any cwd. -->
+  <ItemGroup>
+    <Content Include="..\..\rules\rules\*.yml" Link="rules\%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,39 @@
+{
+  "$comment": "观测配置：社区可维护的核心文件。改此文件增删观察目标，无需改 C# 代码或重新编译探针。nodePattern 为 WPD 相对节点名，用 '/' 分段，'*' 匹配单层任意目录。绝不写盘符、文件名或账号 hash。",
+  "version": 1,
+  "targets": [
+    { "nodePattern": "DCIM", "canonicalLabel": "camera_media" },
+    { "nodePattern": "Camera", "canonicalLabel": "camera_media" },
+    { "nodePattern": "Pictures", "canonicalLabel": "camera_media" },
+    { "nodePattern": "Screenshots", "canonicalLabel": "screenshots" },
+    { "nodePattern": "Download", "canonicalLabel": "downloads" },
+    { "nodePattern": "Recordings", "canonicalLabel": "recordings" },
+    { "nodePattern": "Sounds", "canonicalLabel": "recordings" },
+    { "nodePattern": "VoiceRecorder", "canonicalLabel": "recordings" },
+    { "nodePattern": "Android/data/com.tencent.mm", "canonicalLabel": "unknown" },
+    { "nodePattern": "Android/data/com.tencent.mm/MicroMsg", "canonicalLabel": "unknown" }
+  ],
+  "buckets": {
+    "$comment": "分桶边界：max 为上界（含），value<=max 归入该标签；超出最后一个 max 归入最后标签。sizeBytes 用字节数。修改须同步 rules/schema/observation.schema.json 的 examples，并说明变更理由。",
+    "childCount": [
+      { "max": 0, "label": "0" },
+      { "max": 100, "label": "1-100" },
+      { "max": 1000, "label": "100-1000" },
+      { "max": 10000, "label": "1000-10000" },
+      { "max": 18446744073709551615, "label": "10000+" }
+    ],
+    "sizeBytes": [
+      { "max": 0, "label": "0" },
+      { "max": 104857600, "label": "<100MB" },
+      { "max": 1073741824, "label": "100MB-1GB" },
+      { "max": 5368709120, "label": "1GB-5GB" },
+      { "max": 18446744073709551615, "label": "5GB+" }
+    ]
+  },
+  "rootMapping": {
+    "$comment": "WPD_STORAGE_TYPE -> observation.root。default 为读不到或未知类型时的兜底，绝不靠显示名猜测。",
+    "FIXED_RAM": "internal_shared",
+    "REMOVABLE_RAM": "sdcard1",
+    "default": "unknown"
+  }
+}

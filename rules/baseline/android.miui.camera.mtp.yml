@@ -1,0 +1,24 @@
+# baseline 种子规则：MIUI / HyperOS 相机目录（MTP）
+rule:
+  id: android.miui.camera.mtp
+  priority: 110
+  match:
+    osFamily: android
+    romFamily: [miui, hyperos]
+    sdkRange: ">=21"
+    channel: mtp
+    appPackage: null
+  candidates:
+    - nodePattern: "DCIM/Camera"
+      label: 相机照片与视频
+      risk: read_only
+      defaultAction: backup
+  detect:
+    byFingerprint: "ext:{jpg|png|mp4} ratio > 0.6"
+  confidence: 0.96
+  evidence: [obs_01J8ABCDEFGHIJK]
+  verifiedAt: "2026-11-18"
+  since: "2026-11-01"
+  supersedes: null
+  version: 2
+  status: stable

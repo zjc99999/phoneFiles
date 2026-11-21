@@ -1,0 +1,106 @@
+{
+  "id": "obs_4CB79784B8204195B8D8",
+  "device": {
+    "oem": "Xiaomi",
+    "model": "Redmi 10X Pro",
+    "osVersion": "10",
+    "sdk": 29,
+    "region": "CN"
+  },
+  "app": null,
+  "channel": "mtp",
+  "root": "internal_shared",
+  "volume": {
+    "displayName": "\u5185\u90E8\u5B58\u50A8\u8BBE\u5907",
+    "storageType": "FIXED_RAM",
+    "functionalCategory": "23f05bbc-15de-4c2a-a55b-a9af5ce412ef",
+    "capacityBucket": "64-256GB"
+  },
+  "entries": [
+    {
+      "nodePattern": "DCIM",
+      "canonicalLabel": "camera_media",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:DCIM|ext:{jpg:0.25,tmp:0.12,tmfs:0.12,yz:0.12}"
+    },
+    {
+      "nodePattern": "Camera",
+      "canonicalLabel": "camera_media",
+      "exists": false
+    },
+    {
+      "nodePattern": "Pictures",
+      "canonicalLabel": "camera_media",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:Pictures|ext:{jpg:0.51,png:0.32,jpeg:0.10,db:0.02}"
+    },
+    {
+      "nodePattern": "Screenshots",
+      "canonicalLabel": "screenshots",
+      "exists": false
+    },
+    {
+      "nodePattern": "Download",
+      "canonicalLabel": "downloads",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "100MB-1GB",
+      "fingerprint": "dir:Download|ext:{pdf:0.38,png:0.19,txt:0.09,zip:0.05}"
+    },
+    {
+      "nodePattern": "Recordings",
+      "canonicalLabel": "recordings",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "0",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Recordings|ext:{}"
+    },
+    {
+      "nodePattern": "Sounds",
+      "canonicalLabel": "recordings",
+      "exists": false
+    },
+    {
+      "nodePattern": "VoiceRecorder",
+      "canonicalLabel": "recordings",
+      "exists": false
+    },
+    {
+      "nodePattern": "Android/data/com.tencent.mm",
+      "canonicalLabel": "unknown",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:Android/data/com.tencent.mm|ext:{common:0.50,tim:0.50}"
+    },
+    {
+      "nodePattern": "Android/data/com.tencent.mm/MicroMsg",
+      "canonicalLabel": "unknown",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Android/data/com.tencent.mm/MicroMsg|ext:{}"
+    }
+  ],
+  "privacy": {
+    "filenameSamples": false,
+    "deviceIdHash": "sha256:0e081061da7278732eda8742ecc64f8a5d166c93bd7a5eb73914d447e50bf19a",
+    "consent": "spike-probe-v1"
+  },
+  "client": {
+    "appVersion": "0.1-spike",
+    "os": "Microsoft Windows 10.0.26300",
+    "locale": "zh-CN"
+  },
+  "submittedAt": "2026-11-21T08:41:18.9613266\u002B00:00"
+}

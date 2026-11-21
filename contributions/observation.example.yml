@@ -1,0 +1,60 @@
+# 脱敏真机观测示例 —— 对照 rules/schema/observation.schema.json
+# 复制此模板，按真机实际所见填写；带 ★ 的字段是重中之重。
+observation:
+  id: obs_01J8ABCDEFGHIJK      # 客户端生成的去标识 ID（obs_ + 16~32 位大写字母数字）
+
+  device:
+    oem: xiaomi
+    model: M2102K1C             # ro.product.model
+    marketName: Redmi K40       # 可选
+    osVersion: "13"
+    sdk: 33
+    romBuild: "MIUI 14.0.8"
+    romFamily: miui             # 用于聚类：miui/hyperos/coloros/oneui/pixel 等
+    region: CN
+
+  app:                          # 能探测到版本就填，否则写 null
+    package: null
+    version: null
+
+  channel: mtp                  # ★ mtp | adb —— 同机两通道是两条不同观测
+  root: internal_shared         # internal_shared | sdcard1 | usb_otg
+
+  entries:
+    - nodePattern: "DCIM/Camera"
+      canonicalLabel: camera_media
+      exists: true
+      canEnumerate: true
+      childCountBucket: "1000-10000"
+      sizeBucket: "1GB-5GB"
+      mtimeRange: "2019-01 ~ 2026-11"
+      fingerprint: "dir:DCIM/Camera|ext:{jpg:0.82,mp4:0.15,other:0.03}"  # ★ 只含目录名与扩展名分布
+
+    - nodePattern: "DCIM/Screenshots"
+      canonicalLabel: screenshots
+      exists: true
+      canEnumerate: true
+      childCountBucket: "100-1000"
+      sizeBucket: "100MB-1GB"
+      fingerprint: "dir:DCIM/Screenshots|ext:{png:0.95,jpg:0.05}"
+
+    - nodePattern: "Download"
+      canonicalLabel: downloads
+      exists: true
+      canEnumerate: true
+
+    - nodePattern: "Android/data/com.tencent.mm"
+      exists: false             # ★ 记录「对 MTP 不可见」同样有价值
+      canEnumerate: false
+
+  privacy:
+    filenameSamples: false      # ★ 必须 false：不传文件名/内容/账号 hash 原文
+    deviceIdHash: "sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"  # 加盐 sha256，仅去重
+    consent: telemetry_opt_in_v1
+
+  client:
+    appVersion: "0.3.1"
+    os: "Windows 11 23H2"
+    locale: zh-CN
+
+  submittedAt: "2026-11-21T11:35:48+08:00"

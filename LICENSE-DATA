@@ -1,0 +1,58 @@
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+
+Copyright (c) PhoneFiles contributors
+
+The rules, observations, and other data assets in this repository's `rules/`
+and `contributions/` directories (the "Data") are licensed under the
+Creative Commons Attribution-ShareAlike 4.0 International License.
+
+You are free to:
+
+  Share — copy and redistribute the Data in any medium or format.
+  Adapt — remix, transform, and build upon the Data for any purpose,
+          even commercially.
+
+Under the following terms:
+
+  Attribution — You must give appropriate credit, provide a link to the
+                license, and indicate if changes were made. You may do so
+                in any reasonable manner, but not in any way that suggests
+                the licensor endorses you or your use.
+
+  ShareAlike — If you remix, transform, or build upon the Data, you must
+               distribute your contributions under the same license as
+               the original.
+
+  No additional restrictions — You may not apply legal terms or
+               technological measures that legally restrict others from
+               doing anything the license permits.
+
+Notices:
+
+  You do not have to comply with the license for elements of the Data in
+  the public domain or where your use is permitted by an applicable
+  exception or limitation.
+
+  No warranties are given. The license may not give you all of the
+  permissions necessary for your intended use (for example, other rights
+  such as publicity, privacy, or moral rights may limit how you use the
+  Data).
+
+This is a human-readable summary of (and not a substitute for) the license.
+The full legal code is available at:
+
+  https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+The official deed (human-readable summary) is at:
+
+  https://creativecommons.org/licenses/by-sa/4.0/
+
+--------------------------------------------------------------------------
+Why this license for Data (not AGPL, not Apache):
+
+  - The rule库 is a data asset whose value grows with redistribution and
+    derivative contributions; CC BY-SA keeps derivatives flowing back.
+  - AGPL was explicitly rejected: it would force B-end customers who deploy
+    the tool internally to open-source, conflicting with the commercial
+    path described in README.md.
+  - Source code is separately licensed under Apache-2.0 (see LICENSE).

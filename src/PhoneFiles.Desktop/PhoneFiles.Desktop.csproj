@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PhoneFiles.Core\PhoneFiles.Core.csproj" />
+    <ProjectReference Include="..\PhoneFiles.Transport.Mtp\PhoneFiles.Transport.Mtp.csproj" />
+  </ItemGroup>
+
+  <!-- Ship the baseline rule set next to the executable so the UI can load rules offline. -->
+  <ItemGroup>
+    <Content Include="..\..\rules\rules\*.yml" Link="rules\%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

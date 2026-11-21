@@ -1,0 +1,106 @@
+{
+  "id": "obs_3C0155FBCAF440259AA9",
+  "device": {
+    "oem": "Xiaomi",
+    "model": "Redmi 10X Pro",
+    "osVersion": "10",
+    "sdk": 29,
+    "region": "CN"
+  },
+  "app": null,
+  "channel": "mtp",
+  "root": "sdcard1",
+  "volume": {
+    "displayName": "disk",
+    "storageType": "REMOVABLE_RAM",
+    "functionalCategory": "23f05bbc-15de-4c2a-a55b-a9af5ce412ef",
+    "capacityBucket": "64-256GB"
+  },
+  "entries": [
+    {
+      "nodePattern": "DCIM",
+      "canonicalLabel": "camera_media",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:DCIM|ext:{tmp:0.25,jpeg:0.25,ppmx:0.25,jpg:0.25}"
+    },
+    {
+      "nodePattern": "Camera",
+      "canonicalLabel": "camera_media",
+      "exists": false
+    },
+    {
+      "nodePattern": "Pictures",
+      "canonicalLabel": "camera_media",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:Pictures|ext:{jpg:0.69,tmp:0.08,gallery2:0.08,sss:0.08}"
+    },
+    {
+      "nodePattern": "Screenshots",
+      "canonicalLabel": "screenshots",
+      "exists": false
+    },
+    {
+      "nodePattern": "Download",
+      "canonicalLabel": "downloads",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:Download|ext:{jpeg:0.21,jpg:0.21,docx:0.13,doc:0.12}"
+    },
+    {
+      "nodePattern": "Recordings",
+      "canonicalLabel": "recordings",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "0",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Recordings|ext:{}"
+    },
+    {
+      "nodePattern": "Sounds",
+      "canonicalLabel": "recordings",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Sounds|ext:{}"
+    },
+    {
+      "nodePattern": "VoiceRecorder",
+      "canonicalLabel": "recordings",
+      "exists": false
+    },
+    {
+      "nodePattern": "Android/data/com.tencent.mm",
+      "canonicalLabel": "unknown",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Android/data/com.tencent.mm|ext:{}"
+    },
+    {
+      "nodePattern": "Android/data/com.tencent.mm/MicroMsg",
+      "canonicalLabel": "unknown",
+      "exists": false
+    }
+  ],
+  "privacy": {
+    "filenameSamples": false,
+    "deviceIdHash": "sha256:0e081061da7278732eda8742ecc64f8a5d166c93bd7a5eb73914d447e50bf19a",
+    "consent": "spike-probe-v1"
+  },
+  "client": {
+    "appVersion": "0.1-spike",
+    "os": "Microsoft Windows 10.0.26300",
+    "locale": "zh-CN"
+  },
+  "submittedAt": "2026-11-21T08:41:18.2015932\u002B00:00"
+}

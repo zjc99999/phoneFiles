@@ -1,0 +1,28 @@
+# MIUI / HyperOS 相机目录规则示例（由多条观测派生）
+rule:
+  id: android.miui.camera.mtp
+  priority: 110               # 比 generic 更高，型号/ROM 加权优先命中
+  match:
+    osFamily: android
+    romFamily: [miui, hyperos]
+    sdkRange: ">=21"
+    channel: mtp
+    appPackage: null
+  candidates:
+    - nodePattern: "DCIM/Camera"
+      label: 相机照片与视频
+      risk: read_only
+      defaultAction: backup
+    - nodePattern: "DCIM/Camera01"
+      label: 相机照片与视频（副摄/双卡）
+      risk: read_only
+      defaultAction: backup
+  detect:
+    byFingerprint: "ext:{jpg|png|mp4} ratio > 0.6"
+  confidence: 0.96
+  evidence: [obs_01J8ABCDEFGHIJK, obs_05P9QRSTUVWXYZ12]
+  verifiedAt: "2026-11-18"
+  since: "2026-11-01"
+  supersedes: null
+  version: 2
+  status: stable

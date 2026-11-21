@@ -1,0 +1,28 @@
+# baseline 种子规则：通用截图目录（MTP）
+rule:
+  id: android.generic.screenshots.mtp
+  priority: 90
+  match:
+    osFamily: android
+    romFamily: []
+    sdkRange: ">=21"
+    channel: mtp
+    appPackage: null
+  candidates:
+    - nodePattern: "DCIM/Screenshots"
+      label: 截图
+      risk: read_only
+      defaultAction: backup
+    - nodePattern: "Pictures/Screenshots"
+      label: 截图（备用位置）
+      risk: read_only
+      defaultAction: backup
+  detect:
+    byFingerprint: "ext:{png} ratio > 0.8"
+  confidence: 0.88
+  evidence: [obs_01J8ABCDEFGHIJK]
+  verifiedAt: "2026-11-18"
+  since: "2026-11-01"
+  supersedes: null
+  version: 1
+  status: stable

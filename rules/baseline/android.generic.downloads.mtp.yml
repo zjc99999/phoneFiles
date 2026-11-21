@@ -1,0 +1,24 @@
+# baseline 种子规则：通用下载目录（MTP）
+rule:
+  id: android.generic.downloads.mtp
+  priority: 90
+  match:
+    osFamily: android
+    romFamily: []
+    sdkRange: ">=21"
+    channel: mtp
+    appPackage: null
+  candidates:
+    - nodePattern: "Download"
+      label: 下载
+      risk: read_only
+      defaultAction: backup
+  detect:
+    byFingerprint: "mixed ext, no dominant"
+  confidence: 0.9
+  evidence: [obs_01J8ABCDEFGHIJK]
+  verifiedAt: "2026-11-18"
+  since: "2026-11-01"
+  supersedes: null
+  version: 1
+  status: stable

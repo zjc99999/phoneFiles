@@ -1,0 +1,18 @@
+# Build outputs
+**/bin/
+**/obj/
+artifacts/
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+
+# Temporary research artifacts
+.tmp-vanara/
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store

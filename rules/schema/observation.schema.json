@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phonefiles.dev/schema/observation.schema.json",
+  "title": "Observation",
+  "description": "一次脱敏真机观测：某台真机、某通道、某时刻实际看到了什么。社区最小贡献单元。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "device", "channel", "root", "entries", "privacy", "client", "submittedAt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "客户端生成的去标识 ID（ULID 风格），不含设备标识。",
+      "pattern": "^obs_[0-9A-Z]{16,32}$"
+    },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["oem", "model", "osVersion", "sdk", "region"],
+      "properties": {
+        "oem": { "type": "string", "description": "厂商标识，小写。", "examples": ["xiaomi", "oppo", "samsung"] },
+        "model": { "type": "string", "description": "ro.product.model。" },
+        "marketName": { "type": "string", "description": "可选，来自型号映射库的市场名。" },
+        "osVersion": { "type": "string", "description": "Android 版本字符串。" },
+        "sdk": { "type": "integer", "minimum": 1, "description": "API level。" },
+        "romBuild": { "type": "string", "description": "ROM 构建号，如 MIUI 14.0.8。" },
+        "romFamily": { "type": "string", "description": "ROM 族，用于聚类：miui/hyperos/coloros/oneui/pixel 等。" },
+        "region": { "type": "string", "description": "地区代码：CN/Global/IN 等。" }
+      }
+    },
+    "app": {
+      "type": ["object", "null"],
+      "description": "能探测到 App 版本时填写，否则 null。",
+      "additionalProperties": false,
+      "required": ["package"],
+      "properties": {
+        "package": { "type": "string", "description": "Android 包名。" },
+        "version": { "type": ["string", "null"], "description": "App 版本，可探测时填。" }
+      }
+    },
+    "channel": {
+      "type": "string",
+      "description": "★关键：通道类型直接决定可见性。同机 MTP 与 ADB 是两条不同观测。",
+      "enum": ["mtp", "adb"]
+    },
+    "root": {
+      "type": "string",
+      "description": "存储卷类型。由 WPD_STORAGE_TYPE 保守推断：FIXED_RAM→internal_shared，REMOVABLE_RAM→sdcard1，其余/读不到→unknown（绝不靠显示名猜测）。",
+      "enum": ["internal_shared", "sdcard1", "usb_otg", "unknown"]
+    },
+    "volume": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "存储卷原始事实，如实记录不猜测。MTP 设备可含多个卷（如内置存储与 TF 卡），每卷单独出一份 observation。",
+      "required": ["displayName"],
+      "properties": {
+        "displayName": { "type": "string", "description": "卷的 WPD 显示名，如 disk / 内部存储设备。" },
+        "storageType": {
+          "type": ["string", "null"],
+          "description": "WPD_STORAGE_TYPE 原始枚举名；读不到为 null。",
+          "enum": ["FIXED_ROM", "REMOVABLE_ROM", "FIXED_RAM", "REMOVABLE_RAM", "UNDEFINED", null]
+        },
+        "functionalCategory": { "type": ["string", "null"], "description": "WPD_FUNCTIONAL_OBJECT_CATEGORY GUID；等于 STORAGE 类别时确认这是存储卷。" },
+        "capacityBucket": { "type": ["string", "null"], "description": "卷容量分桶，不传精确值。" }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "description": "观测到的节点列表。至少 1 条。exists:false 同样有价值。",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["nodePattern", "exists"],
+        "properties": {
+          "nodePattern": {
+            "type": "string",
+            "description": "WPD 相对节点名（非盘符路径），可含 * 通配段。绝不含文件名或账号 hash。",
+            "examples": ["DCIM/Camera", "Android/data/com.tencent.mm"]
+          },
+          "canonicalLabel": {
+            "type": "string",
+            "description": "若已知语义标签则填，否则省略。",
+            "enum": ["camera_media", "screenshots", "downloads", "recordings", "unknown"]
+          },
+          "exists": {
+            "type": "boolean",
+            "description": "★一等公民：记录「不可见」与「可见」同样重要。"
+          },
+          "canEnumerate": {
+            "type": "boolean",
+            "description": "能否枚举子节点。"
+          },
+          "childCountBucket": {
+            "type": "string",
+            "description": "子节点数量分桶（不传精确值）。",
+            "examples": ["0", "1-100", "100-1000", "1000-10000", "10000+"]
+          },
+          "sizeBucket": {
+            "type": "string",
+            "description": "体积分桶（不传精确值）。",
+            "examples": ["0", "<100MB", "100MB-1GB", "1GB-5GB", "5GB+"]
+          },
+          "mtimeRange": {
+            "type": "string",
+            "description": "修改时间跨度（不传单文件时间戳）。"
+          },
+          "fingerprint": {
+            "type": "string",
+            "description": "只含目录名与扩展名分布，绝不含文件名/内容/账号 hash 原文。",
+            "examples": ["dir:DCIM/Camera|ext:{jpg:0.82,mp4:0.15,other:0.03}"]
+          }
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["filenameSamples", "deviceIdHash", "consent"],
+      "properties": {
+        "filenameSamples": {
+          "type": "boolean",
+          "const": false,
+          "description": "必须为 false：绝不上传文件名/内容/账号 hash 原文。"
+        },
+        "deviceIdHash": {
+          "type": "string",
+          "description": "加盐 sha256 去标识指纹，仅用于去重。",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "consent": {
+          "type": "string",
+          "description": "用户同意的遥测版本。"
+        }
+      }
+    },
+    "client": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["appVersion", "os", "locale"],
+      "properties": {
+        "appVersion": { "type": "string" },
+        "os": { "type": "string", "description": "客户端操作系统，如 Windows 11 23H2。" },
+        "locale": { "type": "string", "description": "如 zh-CN。" }
+      }
+    },
+    "submittedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "提交时间，ISO 8601 带时区。"
+    }
+  }
+}

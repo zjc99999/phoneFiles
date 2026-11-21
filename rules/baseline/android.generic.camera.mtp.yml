@@ -1,0 +1,28 @@
+# baseline 种子规则：通用相机目录（MTP）
+rule:
+  id: android.generic.camera.mtp
+  priority: 100
+  match:
+    osFamily: android
+    romFamily: []
+    sdkRange: ">=21"
+    channel: mtp
+    appPackage: null
+  candidates:
+    - nodePattern: "DCIM/Camera"
+      label: 相机照片与视频
+      risk: read_only
+      defaultAction: backup
+    - nodePattern: "DCIM/Camera01"
+      label: 相机照片与视频（副摄/双卡）
+      risk: read_only
+      defaultAction: backup
+  detect:
+    byFingerprint: "ext:{jpg|png|mp4} ratio > 0.6"
+  confidence: 0.94
+  evidence: [obs_01J8ABCDEFGHIJK, obs_02K3LMNOPQRSTUV]
+  verifiedAt: "2026-11-18"
+  since: "2026-11-01"
+  supersedes: null
+  version: 3
+  status: stable

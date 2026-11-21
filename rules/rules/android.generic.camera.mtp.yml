@@ -1,0 +1,29 @@
+# 由多条观测派生的规则示例（非手写真相）
+# evidence[] 为支撑观测 ID；实际入库前需经 2 人 review + 灰度。
+rule:
+  id: android.generic.camera.mtp
+  priority: 100
+  match:
+    osFamily: android
+    romFamily: []          # 空数组 = 通配所有 ROM 族
+    sdkRange: ">=21"
+    channel: mtp
+    appPackage: null
+  candidates:
+    - nodePattern: "DCIM/Camera"
+      label: 相机照片与视频
+      risk: read_only
+      defaultAction: backup
+    - nodePattern: "DCIM/Camera01"
+      label: 相机照片与视频（副摄/双卡）
+      risk: read_only
+      defaultAction: backup
+  detect:
+    byFingerprint: "ext:{jpg|png|mp4} ratio > 0.6"
+  confidence: 0.94
+  evidence: [obs_01J8ABCDEFGHIJK, obs_02K3LMNOPQRSTUV]
+  verifiedAt: "2026-11-18"
+  since: "2026-11-01"
+  supersedes: null
+  version: 3
+  status: stable

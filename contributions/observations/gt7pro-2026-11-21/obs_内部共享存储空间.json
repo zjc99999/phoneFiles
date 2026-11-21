@@ -1,0 +1,106 @@
+{
+  "id": "obs_4BAE4BB156D448DB8A4F",
+  "device": {
+    "oem": "realme",
+    "model": "GT7 Pro",
+    "osVersion": "17",
+    "sdk": 37,
+    "region": "CN"
+  },
+  "app": null,
+  "channel": "mtp",
+  "root": "internal_shared",
+  "volume": {
+    "displayName": "\u5185\u90E8\u5171\u4EAB\u5B58\u50A8\u7A7A\u95F4",
+    "storageType": "FIXED_RAM",
+    "functionalCategory": "23f05bbc-15de-4c2a-a55b-a9af5ce412ef",
+    "capacityBucket": "256GB\u002B"
+  },
+  "entries": [
+    {
+      "nodePattern": "DCIM",
+      "canonicalLabel": "camera_media",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:DCIM|ext:{tmp:0.25,jpg:0.25,tmfs:0.25,android:0.25}"
+    },
+    {
+      "nodePattern": "Camera",
+      "canonicalLabel": "camera_media",
+      "exists": false
+    },
+    {
+      "nodePattern": "Pictures",
+      "canonicalLabel": "camera_media",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:Pictures|ext:{jpg:0.50,png:0.12,jpeg:0.12,gs:0.12}"
+    },
+    {
+      "nodePattern": "Screenshots",
+      "canonicalLabel": "screenshots",
+      "exists": false
+    },
+    {
+      "nodePattern": "Download",
+      "canonicalLabel": "downloads",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "\u003C100MB",
+      "fingerprint": "dir:Download|ext:{png:0.28,pdf:0.24,jpg:0.12,tmp:0.04}"
+    },
+    {
+      "nodePattern": "Recordings",
+      "canonicalLabel": "recordings",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "0",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Recordings|ext:{}"
+    },
+    {
+      "nodePattern": "Sounds",
+      "canonicalLabel": "recordings",
+      "exists": false
+    },
+    {
+      "nodePattern": "VoiceRecorder",
+      "canonicalLabel": "recordings",
+      "exists": false
+    },
+    {
+      "nodePattern": "Android/data/com.tencent.mm",
+      "canonicalLabel": "unknown",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Android/data/com.tencent.mm|ext:{}"
+    },
+    {
+      "nodePattern": "Android/data/com.tencent.mm/MicroMsg",
+      "canonicalLabel": "unknown",
+      "exists": true,
+      "canEnumerate": true,
+      "childCountBucket": "1-100",
+      "sizeBucket": "0",
+      "fingerprint": "dir:Android/data/com.tencent.mm/MicroMsg|ext:{tmp:1.00}"
+    }
+  ],
+  "privacy": {
+    "filenameSamples": false,
+    "deviceIdHash": "sha256:59e46549189820b82f688c2dc476ccf405c42818dc3a53fc6795d0f6fd97633f",
+    "consent": "spike-probe-v1"
+  },
+  "client": {
+    "appVersion": "0.1-spike",
+    "os": "Microsoft Windows 10.0.26300",
+    "locale": "zh-CN"
+  },
+  "submittedAt": "2026-11-21T09:10:26.4861036\u002B00:00"
+}
